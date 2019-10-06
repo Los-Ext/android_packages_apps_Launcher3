@@ -7,4 +7,7 @@
 
     <!-- Application name -->
     <string name="ext_app_name" translatable="false">Launcher3-Ext</string>
+
+    <!-- Folder titles -->
+    <string name="google_folder_title" translatable="false">Google</string>
 </resources>

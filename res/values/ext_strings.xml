@@ -120,4 +120,8 @@
     <!-- Top shadow -->
     <string name="show_top_shadow_title">Show top shadow</string>
     <string name="show_top_shadow_summary">Add shadow underneath the status bar</string>
+
+    <!-- DT2S -->
+    <string name="pref_sleep_gesture_title">Double tap to sleep</string>
+    <string name="pref_sleep_gesture_summary">Double tap on empty space for screen off</string>
 </resources>

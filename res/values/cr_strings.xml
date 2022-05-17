@@ -413,4 +413,8 @@
     <string name="quick_event_weather_text_summary">Display current weather condition summary</string>
 
     <string name="intent_no_app_clock_found">Unable to find calendar or clock activity</string>
+
+    <!-- Scroll Vibration -->
+    <string name="pref_scroll_vibration_title">Scroll Vibration</string>
+    <string name="pref_scroll_vibration_summary">Haptic feedback while scrolling through recent apps, if supported</string>
 </resources>

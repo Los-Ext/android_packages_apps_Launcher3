@@ -162,4 +162,8 @@
     <string name="work_apps_enable_btn_text_custom">Turn on work apps</string>
     <string name="work_apps_paused_info_body_custom">Your work apps cannot send you notifications, use your battery, or access your location</string>
     <string name="work_apps_paused_telephony_unavailable_body_custom">Your work apps cannot receive phone calls or text messages, send you notifications, use your battery, or access your location</string>
+
+    <!-- Scroll Vibration -->
+    <string name="pref_scroll_vibration_title">Scroll Vibration</string>
+    <string name="pref_scroll_vibration_summary">Haptic feedback while scrolling through recent apps, if supported</string>
 </resources>

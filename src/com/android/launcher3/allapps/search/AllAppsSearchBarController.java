@@ -121,13 +121,22 @@ public class AllAppsSearchBarController
         if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_GO || (
                 actionId == EditorInfo.IME_NULL && event != null
                         && event.getAction() == KeyEvent.ACTION_DOWN)) {
+
+            String query = v.getText().toString();
+
             if (actionId == EditorInfo.IME_NULL) {
                 Log.i(TAG, "User pressed ENTER key");
             } else {
                 Log.i(TAG, "User tapped ime search button");
             }
+
+            // Skip if the query is empty
+            if (query.isEmpty()) {
+                return false;
+            }
+
             // selectFocusedView should return SearchTargetEvent that is passed onto onClick
-            return mLauncher.getAppsView().getMainAdapterProvider().launchHighlightedItem();
+            return mLauncher.getAppsView().getMainAdapterProvider().performGoogleSearch(v, query);
         }
         return false;
     }

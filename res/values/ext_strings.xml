@@ -171,4 +171,7 @@
     <!-- Scroll Vibration -->
     <string name="pref_scroll_vibration_title">Scroll Vibration</string>
     <string name="pref_scroll_vibration_summary">Haptic feedback while scrolling through recent apps, if supported</string>
+
+    <!-- LMOFreeform -->
+    <string name="floating_window">Floating</string>
 </resources>

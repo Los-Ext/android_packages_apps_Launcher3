@@ -180,6 +180,7 @@ public final class Utilities {
     public static final String KEY_SHORT_PARALLAX = "pref_short_parallax";
     public static final String KEY_SINGLE_PAGE_CENTER = "pref_single_page_center";
     public static final String KEY_RECENTS_CHIPS = "pref_recents_chips";
+    public static final String KEY_AUTO_KEYABORD = "pref_auto_keyboard";
 
     /**
      * Returns true if theme is dark.
@@ -1124,5 +1125,10 @@ public final class Utilities {
     public static boolean isSinglePageCentered(Context context) {
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return prefs.getBoolean(KEY_SINGLE_PAGE_CENTER, false);
+    }
+
+    public static boolean enableAutoIme(Context context) {
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        return prefs.getBoolean(KEY_AUTO_KEYABORD, false);
     }
 }

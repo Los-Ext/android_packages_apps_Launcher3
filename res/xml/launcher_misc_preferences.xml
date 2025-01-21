@@ -47,7 +47,7 @@
         android:max="175"
         android:min="0"
         settings:units="px"
-        android:defaultValue="23" />
+        android:defaultValue="0" />
 
     <androidx.preference.PreferenceScreen
         android:persistent="false"

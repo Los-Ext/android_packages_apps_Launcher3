@@ -63,9 +63,6 @@
     <uses-permission android:name="android.permission.REGISTER_STATS_PULL_ATOM"/>
     <uses-permission android:name="android.permission.ACCESS_CONTEXTUAL_SEARCH"/>
 
-    <!-- AppLock -->
-    <uses-permission android:name="android.permission.MANAGE_APP_LOCK" />
-
     <!-- Floating window -->
     <uses-permission android:name="com.crdroid.permission.START_FREEFORM" />
 
@@ -264,7 +261,6 @@
         <activity
             android:name="com.android.launcher3.lineage.trust.TrustAppsActivity"
             android:label="@string/trust_apps_manager_name"
-            android:permission="android.permission.MANAGE_APP_LOCK"
             android:theme="@style/Theme.SubSettingsBase"
             android:autoRemoveFromRecents="true" />
     </application>

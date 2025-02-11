@@ -46,9 +46,6 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.util.MultiValueAlpha;
 import com.android.launcher3.util.NavigationMode;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.lang.Runnable;
 import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
@@ -175,35 +172,6 @@ public class MemInfoView extends TextView {
         return knownSizes[knownSizes.length - 1];
     }
 
-    private long getZramSize() {
-        long zramSize = 0;
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("/sys/block/zram0/disksize"))) {
-            zramSize = Long.parseLong(reader.readLine().trim());
-        } catch (IOException | NumberFormatException e) {
-            Log.w(TAG, "Primary ZRAM location failed, trying fallback", e);
-        }
-
-        if (zramSize == 0) {
-            try (BufferedReader reader = new BufferedReader(new FileReader("/proc/swaps"))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.contains("zram0")) {
-                        String[] parts = line.split("\\s+");
-                        if (parts.length > 2) {
-                            zramSize = Long.parseLong(parts[2]) * 1024; // KB to bytes
-                        }
-                        break;
-                    }
-                }
-            } catch (IOException | NumberFormatException e) {
-                Log.w(TAG, "Fallback ZRAM location not available", e);
-            }
-        }
-
-        return zramSize;
-    }
-
     public void setListener(Context context) {
         setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -268,16 +236,9 @@ public class MemInfoView extends TextView {
             long freeMemory = view.mMemInfoReader.getFreeSize() +
                               view.mMemInfoReader.getCachedSize() +
                               view.getTotalBackgroundMemory();
-            long zramSize = view.getZramSize();
 
             String availResult = Formatter.formatShortFileSize(view.mContext, freeMemory);
-            String text;
-            if (zramSize > 0) {
-                String zramResult = Formatter.formatShortFileSize(view.mContext, zramSize);
-                text = String.format(Locale.getDefault(), view.mMemInfoText, availResult, view.mTotalResult + " + " + zramResult + " ZRAM");
-            } else {
-                text = String.format(Locale.getDefault(), view.mMemInfoText, availResult, view.mTotalResult);
-            }
+            String text = String.format(Locale.getDefault(), view.mMemInfoText, availResult, view.mTotalResult);
 
             ThreadUtils.postOnMainThread(() -> view.setText(text));
 

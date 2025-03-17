@@ -118,7 +118,6 @@ public class MemInfoView extends TextView implements Insettable {
 
         mMemInfoText = context.getResources().getString(R.string.meminfo_text);
         setListener(context);
-        setTextColor(0xFFFFFFFF);
     }
 
     @Override

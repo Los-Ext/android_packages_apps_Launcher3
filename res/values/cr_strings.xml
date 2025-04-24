@@ -416,7 +416,8 @@
     <string name="intent_no_app_clock_found">Unable to find calendar or clock activity</string>
 
     <!-- Lock -->
-    <string name="action_lock">Lock/Unlock app</string>
+    <string name="action_locked">Lock app</string>
+    <string name="action_unlocked">Unlock app</string>
     <string name="unlock_app">Unlocked app in recents</string>
     <string name="lock_app">Locked app in recents</string>
 </resources>

@@ -1357,15 +1357,6 @@ public class Launcher extends StatefulActivity<LauncherState>
         TraceHelper.INSTANCE.endSection();
 
         LauncherAppState.INSTANCE.executeIfCreated(app -> app.checkIfRestartNeeded());
-        
-        releaseMemory();
-    }
-
-    private void releaseMemory() {
-        try {
-            android.app.ActivityManager.getService().releaseMemory(900, 20, false, false);
-        } catch (Exception e) {
-        }
     }
 
     @Override
@@ -1387,8 +1378,6 @@ public class Launcher extends StatefulActivity<LauncherState>
         mAppWidgetHolder.setActivityResumed(false);
         
         mHandler.postDelayed(mLauncherGcOpt, 1000);
-        
-        releaseMemory();
     }
 
     /**

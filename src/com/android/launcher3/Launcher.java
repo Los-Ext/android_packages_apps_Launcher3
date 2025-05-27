@@ -237,7 +237,6 @@ import com.android.launcher3.util.IntArray;
 import com.android.launcher3.util.IntSet;
 import com.android.launcher3.util.ItemInflater;
 import com.android.launcher3.util.KeyboardShortcutsDelegate;
-import com.android.launcher3.util.L3BoostFramework;
 import com.android.launcher3.util.LockedUserState;
 import com.android.launcher3.util.MSDLPlayerWrapper;
 import com.android.launcher3.util.PackageUserKey;
@@ -2998,7 +2997,6 @@ public class Launcher extends StatefulActivity<LauncherState>
 
     /** Pauses view updates that should not be run during the app launch animation. */
     public void pauseExpensiveViewUpdates() {
-        L3BoostFramework.INSTANCE().animationBoostOn(L3BoostFramework.REQUEST_ANIMATION_BOOST_TYPE_LAUNCHER_ANIMATION_BOOST);
         // Pause page indicator animations as they lead to layer trashing.
         getWorkspace().getPageIndicator().pauseAnimations();
 
@@ -3012,7 +3010,6 @@ public class Launcher extends StatefulActivity<LauncherState>
 
     /** Resumes view updates at the end of the app launch animation. */
     public void resumeExpensiveViewUpdates() {
-        L3BoostFramework.INSTANCE().animationBoostOff(L3BoostFramework.REQUEST_ANIMATION_BOOST_TYPE_LAUNCHER_ANIMATION_BOOST);
         getWorkspace().getPageIndicator().skipAnimationsToEnd();
 
         getWorkspace().mapOverItems((info, view) -> {

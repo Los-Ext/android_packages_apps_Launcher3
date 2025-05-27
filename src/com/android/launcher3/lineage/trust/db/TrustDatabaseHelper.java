@@ -15,7 +15,6 @@
  */
 package com.android.launcher3.lineage.trust.db;
 
-import android.app.AppLockManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -37,12 +36,9 @@ public class TrustDatabaseHelper extends SQLiteOpenHelper {
 
     @Nullable
     private static TrustDatabaseHelper sSingleton;
-    
-    private final AppLockManager mAppLockManager;
 
     private TrustDatabaseHelper(@NonNull Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        mAppLockManager = context.getSystemService(AppLockManager.class);
     }
 
     public static synchronized TrustDatabaseHelper getInstance(@NonNull Context context) {
@@ -54,7 +50,16 @@ public class TrustDatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {}
+    public void onCreate(SQLiteDatabase db) {
+        String CMD_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
+                "(" +
+                KEY_UID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                KEY_PKGNAME + " TEXT," +
+                KEY_HIDDEN + " INTEGER DEFAULT 0," +
+                KEY_PROTECTED + " INTEGER DEFAULT 0" +
+                ")";
+        db.execSQL(CMD_CREATE_TABLE);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -64,14 +69,54 @@ public class TrustDatabaseHelper extends SQLiteOpenHelper {
         if (isPackageHidden(packageName)) {
             return;
         }
-        mAppLockManager.setPackageHidden(packageName, true);
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put(KEY_PKGNAME, packageName);
+            values.put(KEY_HIDDEN, 1);
+
+            int rows = db.update(TABLE_NAME, values, KEY_PKGNAME + " = ?",
+                    new String[]{KEY_PKGNAME});
+            if (rows != 1) {
+                // Entry doesn't exist, create a new one
+                db.insertOrThrow(TABLE_NAME, null, values);
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            // Ignored
+        } finally {
+            db.endTransaction();
+        }
     }
 
     public void addProtectedApp(@NonNull String packageName) {
         if (isPackageProtected(packageName)) {
             return;
         }
-        mAppLockManager.setShouldProtectApp(packageName, true);
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put(KEY_PKGNAME, packageName);
+            values.put(KEY_PROTECTED, 1);
+
+            int rows = db.update(TABLE_NAME, values, KEY_PKGNAME + " = ?",
+                    new String[]{KEY_PKGNAME});
+            if (rows != 1) {
+                // Entry doesn't exist, create a new one
+                db.insertOrThrow(TABLE_NAME, null, values);
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            // Ignored
+        } finally {
+            db.endTransaction();
+        }
     }
 
 
@@ -79,21 +124,79 @@ public class TrustDatabaseHelper extends SQLiteOpenHelper {
         if (!isPackageHidden(packageName)) {
             return;
         }
-        mAppLockManager.setPackageHidden(packageName, false);
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put(KEY_HIDDEN, 0);
+
+            db.update(TABLE_NAME, values, KEY_PKGNAME + " = ?", new String[]{packageName});
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            // Ignored
+        } finally {
+            db.endTransaction();
+        }
     }
 
     public void removeProtectedApp(@NonNull String packageName) {
         if (!isPackageProtected(packageName)) {
             return;
         }
-        mAppLockManager.setShouldProtectApp(packageName, false);
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put(KEY_PROTECTED, 0);
+
+            db.update(TABLE_NAME, values, KEY_PKGNAME + " = ?", new String[]{packageName});
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            // Ignored
+        } finally {
+            db.endTransaction();
+        }
     }
 
     public boolean isPackageHidden(@NonNull String packageName) {
-        return mAppLockManager.isPackageHidden(packageName);
+        String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ?", TABLE_NAME,
+                KEY_PKGNAME, KEY_HIDDEN);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{packageName, String.valueOf(1)});
+        boolean result = false;
+        try {
+            result = cursor.getCount() != 0;
+        } catch (Exception e) {
+            // Ignored
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
+        return result;
     }
 
     public boolean isPackageProtected(@NonNull String packageName) {
-        return mAppLockManager.isPackageProtected(packageName);
+        String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ?", TABLE_NAME,
+                KEY_PKGNAME, KEY_PROTECTED);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{packageName, String.valueOf(1)});
+        boolean result = false;
+        try {
+            result = cursor.getCount() != 0;
+        } catch (Exception e) {
+            // Ignored
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+
+        return result;
     }
 }

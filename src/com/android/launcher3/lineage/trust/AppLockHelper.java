@@ -43,23 +43,29 @@ public class AppLockHelper {
         return sSingleton;
     }
 
-    public void setShouldHideApp(@NonNull String packageName, boolean hide) {
-        mAppLockManager.setPackageHidden(packageName, hide);
+    public void addProtectedApp(@NonNull String packageName) {
+        mAppLockManager.addPackage(packageName);
     }
 
-    public boolean isPackageHidden(@NonNull String packageName) {
-        return mAppLockManager.isPackageHidden(packageName);
+    public void removeProtectedApp(@NonNull String packageName) {
+        mAppLockManager.removePackage(packageName);
     }
 
-    public void setShouldProtectApp(@NonNull String packageName, boolean protect) {
-        mAppLockManager.setShouldProtectApp(packageName, protect);
-    }
+    public boolean isProtected(@NonNull String packageName) {
 
-    public boolean isPackageProtected(@NonNull String packageName) {
-        return mAppLockManager.isPackageProtected(packageName);
-    }
+        List<AppLockData> appList = mAppLockManager.getPackageData();
+        for (int i = 0; i < appList.size(); i++) {
+            if (packageName.equals(appList.get(i).getPackageName())) {
+                return true;
+            }
+        }
 
-    public int getHiddenPackagesCount() {
-        return  mAppLockManager.getHiddenPackages().size();
+        /*for (AppLockData data : mAppLockManager.getPackageData()) {
+            if (package.equals(data.getPackageName())) {
+                return true;
+            }
+        }*/
+
+        return false;
     }
 }

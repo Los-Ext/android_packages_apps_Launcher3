@@ -46,6 +46,7 @@ import com.android.launcher3.LauncherPrefs;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.lineage.trust.db.TrustComponent;
+import com.android.launcher3.lineage.trust.db.HiddenAppsDBHelper;
 
 import com.google.android.material.color.DynamicColors;
 
@@ -64,6 +65,7 @@ public class TrustAppsActivity extends CollapsingToolbarBaseActivity implements
     private LinearLayout mLoadingView;
     private ProgressBar mProgressBar;
 
+    private HiddenAppsDBHelper mDbHelper;
     private TrustAppsAdapter mAdapter;
     private AppLockHelper mAppLockHelper;
 
@@ -94,6 +96,7 @@ public class TrustAppsActivity extends CollapsingToolbarBaseActivity implements
 
         final boolean hasSecureKeyguard = Utilities.hasSecureKeyguard(this);
         mAdapter = new TrustAppsAdapter(this, this, hasSecureKeyguard);
+        mDbHelper = HiddenAppsDBHelper.getInstance(this);
         mAppLockHelper = AppLockHelper.getInstance(this);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -102,7 +105,7 @@ public class TrustAppsActivity extends CollapsingToolbarBaseActivity implements
 
         showOnBoarding(false);
 
-        new LoadTrustComponentsTask(mAppLockHelper, getPackageManager(), this, this).execute();
+        new LoadTrustComponentsTask(mDbHelper, mAppLockHelper, getPackageManager(), this).execute();
     }
 
     @Override
@@ -128,12 +131,12 @@ public class TrustAppsActivity extends CollapsingToolbarBaseActivity implements
 
     @Override
     public void onHiddenItemChanged(@NonNull TrustComponent component) {
-        new UpdateItemTask(mAppLockHelper, this, HIDDEN).execute(component);
+        new UpdateItemTask(mDbHelper, mAppLockHelper, this, HIDDEN).execute(component);
     }
 
     @Override
     public void onProtectedItemChanged(@NonNull TrustComponent component) {
-        new UpdateItemTask(mAppLockHelper, this, PROTECTED).execute(component);
+        new UpdateItemTask(mDbHelper, mAppLockHelper, this, PROTECTED).execute(component);
     }
 
     @Override

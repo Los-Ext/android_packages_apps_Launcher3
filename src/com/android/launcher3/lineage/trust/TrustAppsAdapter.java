@@ -17,8 +17,6 @@
 package com.android.launcher3.lineage.trust;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
@@ -33,9 +31,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.util.crdroid.Utils;
 import com.android.launcher3.R;
 import com.android.launcher3.lineage.trust.db.TrustComponent;
+import com.android.launcher3.lineage.LineageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,9 +104,9 @@ class TrustAppsAdapter extends RecyclerView.Adapter<TrustAppsAdapter.ViewHolder>
             mProtectedView.setImageResource(component.isProtected() ?
                     R.drawable.ic_protected_locked : R.drawable.ic_protected_unlocked);
 
-            mProtectedView.setVisibility(hasSecureKeyguard ? View.VISIBLE : View.GONE);
-
-            mHiddenView.setVisibility(Utils.launchablePackages(mContext).contains(component.getPackageName()) ?
+            boolean isLockable =
+                    LineageUtils.isPackageLockable(mContext, component.getPackageName());
+            mProtectedView.setVisibility(hasSecureKeyguard && isLockable ?
                     View.VISIBLE : View.GONE);
 
             mHiddenView.setOnClickListener(v -> {

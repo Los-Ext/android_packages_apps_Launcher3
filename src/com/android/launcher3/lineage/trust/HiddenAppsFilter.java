@@ -19,16 +19,16 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import com.android.launcher3.AppFilter;
-import com.android.launcher3.lineage.trust.db.HiddenAppsDBHelper;
+import com.android.launcher3.lineage.trust.db.TrustDatabaseHelper;
 
 @SuppressWarnings("unused")
 public class HiddenAppsFilter extends AppFilter {
-    private HiddenAppsDBHelper mDbHelper;
+    private TrustDatabaseHelper mDbHelper;
 
     public HiddenAppsFilter(Context context) {
         super(context);
 
-        mDbHelper = HiddenAppsDBHelper.getInstance(context);
+        mDbHelper = TrustDatabaseHelper.getInstance(context);
     }
 
     @Override

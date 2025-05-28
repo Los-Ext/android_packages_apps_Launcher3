@@ -55,7 +55,7 @@ import com.android.launcher3.icons.IconProvider;
 import com.android.launcher3.icons.LauncherIconProvider;
 import com.android.launcher3.icons.LauncherIcons;
 import com.android.launcher3.lineage.trust.HiddenAppsFilter;
-import com.android.launcher3.lineage.trust.db.HiddenAppsDBHelper;
+import com.android.launcher3.lineage.trust.db.TrustDatabaseHelper;
 import com.android.launcher3.logging.FileLog;
 import com.android.launcher3.model.ModelLauncherCallbacks;
 import com.android.launcher3.model.WidgetsFilterDataProvider;
@@ -289,8 +289,8 @@ public class LauncherAppState implements SafeCloseable {
         return mIsSafeModeEnabled;
     }
 
-    public HiddenAppsDBHelper getHiddenData() {
-        return HiddenAppsDBHelper.getInstance(this.mContext);
+    public TrustDatabaseHelper getTrustData() {
+        return TrustDatabaseHelper.getInstance(this.mContext);
     }
 
     /**

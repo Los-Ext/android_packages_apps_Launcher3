@@ -272,7 +272,7 @@ public class MemInfoView extends TextView implements Insettable {
             long freeMemory = view.mMemInfoReader.getFreeSize() +
                               view.mMemInfoReader.getCachedSize() +
                               view.getTotalBackgroundMemory();
-            long zramSize = view.getZramSize();
+            long zramSize = 0;
 
             String availResult = Formatter.formatShortFileSize(view.mContext, freeMemory);
             String text;

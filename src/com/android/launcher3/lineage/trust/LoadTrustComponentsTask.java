@@ -25,7 +25,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 
 import com.android.launcher3.lineage.trust.db.TrustComponent;
-import com.android.launcher3.lineage.trust.db.HiddenAppsDBHelper;
+import com.android.launcher3.lineage.trust.db.TrustDatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,10 +33,7 @@ import java.util.List;
 
 public class LoadTrustComponentsTask extends AsyncTask<Void, Integer, List<TrustComponent>> {
     @NonNull
-    private HiddenAppsDBHelper mDbHelper;
-
-    @NonNull
-    private AppLockHelper mAppLockHelper;
+    private TrustDatabaseHelper mDbHelper;
 
     @NonNull
     private PackageManager mPackageManager;
@@ -44,12 +41,10 @@ public class LoadTrustComponentsTask extends AsyncTask<Void, Integer, List<Trust
     @NonNull
     private Callback mCallback;
 
-    LoadTrustComponentsTask(@NonNull HiddenAppsDBHelper dbHelper,
-            @NonNull AppLockHelper appLockHelper,
+    LoadTrustComponentsTask(@NonNull TrustDatabaseHelper dbHelper,
             @NonNull PackageManager packageManager,
             @NonNull Callback callback) {
         mDbHelper = dbHelper;
-        mAppLockHelper = appLockHelper;
         mPackageManager = packageManager;
         mCallback = callback;
     }
@@ -74,7 +69,7 @@ public class LoadTrustComponentsTask extends AsyncTask<Void, Integer, List<Trust
                                 PackageManager.GET_META_DATA)).toString();
                 Drawable icon = app.loadIcon(mPackageManager);
                 boolean isHidden = mDbHelper.isPackageHidden(pkgName);
-                boolean isProtected = mAppLockHelper.isProtected(pkgName);
+                boolean isProtected = mDbHelper.isPackageProtected(pkgName);
 
                 list.add(new TrustComponent(pkgName, icon, label, isHidden, isProtected));
 

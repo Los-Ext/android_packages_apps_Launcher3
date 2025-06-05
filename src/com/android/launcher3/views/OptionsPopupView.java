@@ -56,7 +56,7 @@ import com.android.launcher3.widget.picker.WidgetsFullSheet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.android.internal.util.crdroid.Utils;
+import com.android.internal.util.android.Utils;
 
 /**
  * Popup shown on long pressing an empty space in launcher

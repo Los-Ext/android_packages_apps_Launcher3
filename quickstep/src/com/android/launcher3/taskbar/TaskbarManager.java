@@ -127,9 +127,6 @@ public class TaskbarManager {
     public static final Uri NAVIGATION_BAR_HINT = LineageSettings.System.getUriFor(
             LineageSettings.System.NAVIGATION_BAR_HINT);
 
-    public static final Uri GESTURE_NAVBAR_LENGTH_MODE = Settings.System.getUriFor(
-            Settings.System.GESTURE_NAVBAR_LENGTH_MODE);
-
     public static final Uri FORCE_SHOW_NAVBAR = LineageSettings.System.getUriFor(
             LineageSettings.System.FORCE_SHOW_NAVBAR);
 
@@ -279,8 +276,6 @@ public class TaskbarManager {
                 .register(ENABLE_TASKBAR, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .register(NAVIGATION_BAR_HINT, mOnTaskBarChangeListener);
-        SettingsCache.INSTANCE.get(mWindowContext)
-                .register(GESTURE_NAVBAR_LENGTH_MODE, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .register(FORCE_SHOW_NAVBAR, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
@@ -763,8 +758,6 @@ public class TaskbarManager {
                 .unregister(ENABLE_TASKBAR, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .unregister(NAVIGATION_BAR_HINT, mOnTaskBarChangeListener);
-        SettingsCache.INSTANCE.get(mWindowContext)
-                .unregister(GESTURE_NAVBAR_LENGTH_MODE, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .unregister(FORCE_SHOW_NAVBAR, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)

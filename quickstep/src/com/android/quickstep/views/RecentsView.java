@@ -4695,7 +4695,11 @@ public abstract class RecentsView<
     private void updateLockIcon(String pkg) {
         boolean isLocked = getLockedTasks().contains(pkg);
         if (mLockButtonView != null) {
-            mLockButtonView.setImageResource(isLocked ? R.drawable.recents_locked : R.drawable.recents_unlocked);
+            int resId = isLocked ? R.drawable.recents_locked : R.drawable.recents_unlocked;
+            Drawable icon = androidx.core.content.ContextCompat.getDrawable(getContext(), resId);
+            if (icon != null) {
+                mLockButtonView.setImageDrawable(icon);
+            }
         }
     }
 

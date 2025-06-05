@@ -119,7 +119,7 @@ public class TaskbarManager {
             Settings.Secure.NAV_BAR_KIDS_MODE);
 
     public static final Uri NAV_BAR_INVERSE = Settings.Secure.getUriFor(
-            Settings.Secure.NAVBAR_INVERSE_LAYOUT);
+            "sysui_nav_bar_inverse");
 
     public static final Uri ENABLE_TASKBAR = LineageSettings.System.getUriFor(
             LineageSettings.System.ENABLE_TASKBAR);

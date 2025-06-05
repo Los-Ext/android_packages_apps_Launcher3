@@ -130,9 +130,6 @@ public class TaskbarManager {
     public static final Uri GESTURE_NAVBAR_LENGTH_MODE = Settings.System.getUriFor(
             Settings.System.GESTURE_NAVBAR_LENGTH_MODE);
 
-    public static final Uri GESTURE_NAVBAR_HEIGHT_MODE = Settings.System.getUriFor(
-            Settings.System.GESTURE_NAVBAR_HEIGHT_MODE);
-
     public static final Uri FORCE_SHOW_NAVBAR = LineageSettings.System.getUriFor(
             LineageSettings.System.FORCE_SHOW_NAVBAR);
 
@@ -284,8 +281,6 @@ public class TaskbarManager {
                 .register(NAVIGATION_BAR_HINT, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .register(GESTURE_NAVBAR_LENGTH_MODE, mOnTaskBarChangeListener);
-        SettingsCache.INSTANCE.get(mWindowContext)
-                .register(GESTURE_NAVBAR_HEIGHT_MODE, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .register(FORCE_SHOW_NAVBAR, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
@@ -770,8 +765,6 @@ public class TaskbarManager {
                 .unregister(NAVIGATION_BAR_HINT, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .unregister(GESTURE_NAVBAR_LENGTH_MODE, mOnTaskBarChangeListener);
-        SettingsCache.INSTANCE.get(mWindowContext)
-                .unregister(GESTURE_NAVBAR_HEIGHT_MODE, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)
                 .unregister(FORCE_SHOW_NAVBAR, mOnTaskBarChangeListener);
         SettingsCache.INSTANCE.get(mWindowContext)

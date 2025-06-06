@@ -167,7 +167,7 @@ public class OverviewActionsView<T extends OverlayUICallbacks> extends FrameLayo
         mScreenshot = prefs.getBoolean(KEY_RECENTS_SCREENSHOT, true);
         mClearAll = prefs.getBoolean(KEY_RECENTS_CLEAR_ALL, true);
         mLens = prefs.getBoolean(KEY_RECENTS_LENS, false);
-        mLock = prefs.getBoolean(KEY_RECENTS_LOCK, true);
+        mLock = false;
         prefs.registerOnSharedPreferenceChangeListener(this);
     }
 

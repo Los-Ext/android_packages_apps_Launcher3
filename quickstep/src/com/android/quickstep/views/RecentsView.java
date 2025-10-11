@@ -1227,6 +1227,9 @@ public abstract class RecentsView<
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
         updateTaskStackListenerState();
+        if (visibility != VISIBLE && enableOverviewBackgroundWallpaperBlur()) {
+            mBlurUtils.setDrawLiveTileBelowRecents(false);
+        }
     }
 
     public void init(OverviewActionsView actionsView, SplitSelectStateController splitController,

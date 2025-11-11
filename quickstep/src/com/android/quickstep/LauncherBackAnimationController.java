@@ -132,6 +132,8 @@ public class LauncherBackAnimationController {
     private boolean mOverridingStatusBarFlags;
     private int mMaxBlurRadius;
     private int mLastBlurRadius = 0;
+    
+    private final boolean predictiveBackToHomeBlur = false;
 
     private boolean mCallbacksRegistered;
     private boolean mBackRegistered;
@@ -387,7 +389,7 @@ public class LauncherBackAnimationController {
                 && !mLauncher.isInState(LauncherState.ALL_APPS)) {
             Animations.cancelOngoingAnimation(mLauncher.getWorkspace());
             Animations.cancelOngoingAnimation(mLauncher.getHotseat());
-            if (Flags.predictiveBackToHomeBlur()) {
+            if (predictiveBackToHomeBlur) {
                 mLauncher.getDepthController().pauseBlursOnWindows(true);
             }
             mLauncher.getDepthController().stateDepth.setValue(
@@ -495,7 +497,7 @@ public class LauncherBackAnimationController {
     }
 
     private void setBlur(int blurRadius) {
-        if (Flags.predictiveBackToHomeBlur()) {
+        if (predictiveBackToHomeBlur) {
             mTransaction.setBackgroundBlurRadius(mScrimLayer, blurRadius);
         }
     }
@@ -607,7 +609,7 @@ public class LauncherBackAnimationController {
         if (mScrimLayer != null) {
             removeScrimLayer();
         }
-        if (Flags.predictiveBackToHomePolish() && Flags.predictiveBackToHomeBlur()
+        if (Flags.predictiveBackToHomePolish() && predictiveBackToHomeBlur
                 && !mLauncher.getWorkspace().isOverlayShown()
                 && !mLauncher.isInState(LauncherState.ALL_APPS)) {
             mLauncher.getDepthController().pauseBlursOnWindows(false);

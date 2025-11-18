@@ -185,9 +185,6 @@
     <string name="pref_scroll_vibration_title">滚动时振动</string>
     <string name="pref_scroll_vibration_summary">如果支持，在最近任务页面滚动时提供振动反馈</string>
 
-    <!-- LMOFreeform -->
-    <string name="floating_window">自由窗口</string>
-
     <!-- Lock -->
     <string name="action_lock">锁定/解锁应用</string>
     <string name="unlock_app">已在最近任务中解锁应用</string>

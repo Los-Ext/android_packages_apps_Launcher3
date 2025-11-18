@@ -36,8 +36,6 @@
   <string name="drawer_search_summary">Рядок пошуку у верхній частині панелі програм</string>
   <!-- App drawer searchbar -->
   <string name="drawer_search_title">Рядок пошуку додатків</string>
-  <!-- LMOFreeform -->
-  <string name="floating_window">Плаваючі вікна</string>
   <!-- Font size -->
   <string name="font_size_title">Розмір шрифту</string>
   <string name="general_category_title">Загальні</string>

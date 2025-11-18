@@ -159,9 +159,6 @@
     <string name="pref_scroll_vibration_title">Scroll-Vibration</string>
     <string name="pref_scroll_vibration_summary">Haptisches Feedback beim Scrollen durch aktuelle Apps, sofern unterstützt</string>
 
-    <!-- LMOFreeform -->
-    <string name="floating_window">Schwebendes Fenster</string>
-
     <!-- Lock -->
     <string name="action_lock">App sperren/entsperren</string>
     <string name="unlock_app">App im App-Verlauf entsperrt</string>

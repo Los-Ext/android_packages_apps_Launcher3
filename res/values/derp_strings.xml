@@ -435,7 +435,6 @@
     <string name="pref_homescreen_gestures_notifications">Notifications</string>
     <string name="pref_homescreen_gestures_qs_panel">QS panel</string>
     <string name="pref_homescreen_gestures_powermenu">Power menu</string>
-    <string name="pref_homescreen_gestures_clear_all_apps">Clear all apps</string>
 
     <!-- Shake Clear Recents -->
     <string name="recents_shake_clear_all_title">Shake phone to clear all tasks</string>

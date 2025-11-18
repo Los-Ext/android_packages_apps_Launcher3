@@ -168,12 +168,6 @@
     <!-- Gestures -->
     <string name="pref_homescreen_dt_gestures_title">Doppeltes Tippen</string>
     <string name="pref_homescreen_dt_gestures_summary">Wähle die Aktion der Doppeltipp-Geste auf dem Startbildschirm aus</string>
-
-    <!-- Swipe down gestures -->
-    <string name="pref_homescreen_swipe_down_gestures_title">Nach unten wischen</string>
-    <string name="pref_homescreen_swipe_down_gestures_summary">Nach unten wischen Geste auf dem Startbildschirm konfigurieren</string>
-
-    <!-- Gesture actions -->
     <string name="pref_homescreen_gestures_none">Keine</string>
     <string name="pref_homescreen_gestures_sleep">Bildschirm ausschalten</string>
     <string name="pref_homescreen_gestures_torch">Taschenlampe</string>

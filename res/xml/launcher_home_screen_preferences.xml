@@ -26,8 +26,8 @@
             android:key="pref_homescreen_dt_gestures"
             android:title="@string/pref_homescreen_dt_gestures_title"
             android:summary="@string/pref_homescreen_dt_gestures_summary"
-            android:entries="@array/pref_homescreen_gestures_names"
-            android:entryValues="@array/pref_homescreen_gestures_values"
+            android:entries="@array/pref_homescreen_dt_gestures_names"
+            android:entryValues="@array/pref_homescreen_dt_gestures_values"
             android:defaultValue="1"
             android:persistent="false"
             launcher:iconSpaceReserved="false" />
@@ -38,16 +38,6 @@
             android:summary="@string/pref_haptics_on_dt_gestures_summary"
             android:defaultValue="true"
             android:persistent="true"
-            launcher:iconSpaceReserved="false" />
-
-        <ListPreference
-            android:key="pref_homescreen_swipe_down_gestures"
-            android:title="@string/pref_homescreen_swipe_down_gestures_title"
-            android:summary="@string/pref_homescreen_swipe_down_gestures_summary"
-            android:entries="@array/pref_homescreen_gestures_names"
-            android:entryValues="@array/pref_homescreen_gestures_values"
-            android:defaultValue="0"
-            android:persistent="false"
             launcher:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat

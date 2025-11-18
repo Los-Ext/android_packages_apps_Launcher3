@@ -31,11 +31,6 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.android.internal.util.derp.derpUtils;
-import com.android.launcher3.util.VibratorWrapper;
-
-import static com.android.launcher3.LauncherPrefs.getDevicePrefs;
-
 import com.android.launcher3.AbstractFloatingView;
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.Launcher;
@@ -59,8 +54,6 @@ public class StatusBarTouchController implements TouchController {
     private final float mTouchSlop;
     private int mLastAction;
     private final SparseArray<PointF> mDownEvents;
-    private int mSwipeDownGestureMode;
-    private boolean mCustomGestureActive;
 
     /* If {@code false}, this controller should not handle the input {@link MotionEvent}.*/
     private boolean mCanIntercept;
@@ -71,7 +64,6 @@ public class StatusBarTouchController implements TouchController {
         // Guard against TAPs by increasing the touch slop.
         mTouchSlop = 2 * ViewConfiguration.get(l).getScaledTouchSlop();
         mDownEvents = new SparseArray<>();
-        updateSwipeDownGestureMode();
     }
 
     @Override
@@ -80,54 +72,6 @@ public class StatusBarTouchController implements TouchController {
         writer.println(prefix + "mLastAction:" + MotionEvent.actionToString(mLastAction));
         writer.println(prefix + "mSysUiProxy available:"
                 + SystemUiProxy.INSTANCE.get(mLauncher).isActive());
-    }
-
-    private void updateSwipeDownGestureMode() {
-        mSwipeDownGestureMode = Integer.valueOf(
-            getDevicePrefs(mLauncher).getString("pref_homescreen_swipe_down_gestures", "0"));
-    }
-
-    private void executeSwipeDownGesture() {
-        if (mSwipeDownGestureMode == 0) {
-            return;
-        }
-
-        // Check if haptic feedback is enabled
-        if (getDevicePrefs(mLauncher).getBoolean("pref_haptics_on_swipe_down_gestures", true)) {
-            VibratorWrapper.INSTANCE.get(mLauncher).vibrate(VibratorWrapper.EFFECT_CLICK);
-        }
-
-        // Execute the gesture action
-        switch (mSwipeDownGestureMode) {
-            case 0:
-                break;
-            // Sleep
-            case 1:
-                derpUtils.switchScreenOff(mLauncher);
-                break;
-            // Flashlight
-            case 2:
-                derpUtils.toggleCameraFlash();
-                break;
-            case 3: // Volume panel
-                derpUtils.toggleVolumePanel(mLauncher);
-                break;
-            case 4: // Clear notifications
-                derpUtils.clearAllNotifications();
-                break;
-            case 5: // Screenshot
-                derpUtils.takeScreenshot(true);
-                break;
-            case 6: // Notifications
-                derpUtils.toggleNotifications();
-                break;
-            case 7: // QS panel
-                derpUtils.toggleQsPanel();
-                break;
-            case 8: // Powermenu
-                derpUtils.showPowerMenu();
-                break;
-        }
     }
 
     private void dispatchTouchEvent(MotionEvent ev) {
@@ -149,8 +93,6 @@ public class StatusBarTouchController implements TouchController {
             }
             mDownEvents.clear();
             mDownEvents.put(pid, new PointF(ev.getX(), ev.getY()));
-            mCustomGestureActive = false;
-            updateSwipeDownGestureMode();
         } else if (ev.getActionMasked() == MotionEvent.ACTION_POINTER_DOWN) {
             // Check!! should only set it only when threshold is not entered.
             mDownEvents.put(pid, new PointF(ev.getX(idx), ev.getY(idx)));
@@ -161,13 +103,6 @@ public class StatusBarTouchController implements TouchController {
         if (action == ACTION_MOVE && mDownEvents.contains(pid)) {
             float dy = ev.getY(idx) - mDownEvents.get(pid).y;
             float dx = ev.getX(idx) - mDownEvents.get(pid).x;
-            
-            // Check if custom swipe down gesture is enabled
-            if (dy > mTouchSlop && dy > Math.abs(dx) && ev.getPointerCount() == 1 && mSwipeDownGestureMode != 0) {
-                mCustomGestureActive = true;
-                return true; // Intercept for custom gesture
-            }
-            
             // Currently input dispatcher will not do touch transfer if there are more than
             // one touch pointer. Hence, even if slope passed, only set the slippery flag
             // when there is single touch event. (context: InputDispatcher.cpp line 1445)
@@ -187,19 +122,6 @@ public class StatusBarTouchController implements TouchController {
     @Override
     public final boolean onControllerTouchEvent(MotionEvent ev) {
         int action = ev.getAction();
-        
-        if (mCustomGestureActive) {
-            if (action == ACTION_UP) {
-                executeSwipeDownGesture();
-                mCustomGestureActive = false;
-                return true;
-            } else if (action == ACTION_CANCEL) {
-                mCustomGestureActive = false;
-                return true;
-            }
-            return true; // Consume all events while custom gesture is active
-        }
-        
         if (action == ACTION_UP || action == ACTION_CANCEL) {
             dispatchTouchEvent(ev);
             mLauncher.getStatsLogManager().logger()

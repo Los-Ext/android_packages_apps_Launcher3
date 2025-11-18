@@ -124,7 +124,7 @@
     <string name="about_app_version_text">版本</string>
     <string name="about_thanks_cat">特别感谢</string>
     <string name="about">关于</string>
-    <string name="about_summary">关于 DerpLauncher 的信息</string>
+    <string name="about_summary">关于 Launcher3Ext 的信息</string>
 
     <!-- Haptics on DT2S -->
     <string name="pref_haptics_on_dt_gestures_title">双击手势触觉反馈</string>
@@ -234,7 +234,7 @@
     <string name="show_quickspace_summary">在主屏幕顶端显示</string>
 
     <!-- QuickSpace: QuickEvent: Device Intro Event -->
-    <string name="quick_event_rom_intro_welcome">欢迎使用 DerpFest！</string>
+    <string name="quick_event_rom_intro_welcome">欢迎使用 LosExt！</string>
     <string name="quick_event_rom_intro_learn">点击此处，尽享乐趣！</string>
 
     <!-- QuickSpace: QuickEvent: Ambient Play -->
@@ -303,13 +303,13 @@
         <item>Did you checkout all the tweaks?</item>
         <item>How many screenshots do you take?</item>
         <item>Spread love not havoc</item>
-        <item>Is your device derped?</item>
+        <item>Is your device snappyyy?</item>
         <item>I wish I could use VoLTE</item>
         <item>Have fun!</item>
         <item>Let\'s get this grind, gamer!</item>
         <item>\u003C\u003C\u003C\u003C\u003C\u003C\u003C HEAD</item>
-        <item>You need DerpLauncher Premium to see this</item>
-        <item>You need DerpFest Premium to see this</item>
+        <item>You need Launcher3Ext Premium to see this</item>
+        <item>You need LosExt Premium to see this</item>
         <item>A carbonized owl statue</item>
         <item>...cause 404 sucks!</item>
         <item>Eat your veggies and send logs</item>
@@ -334,12 +334,12 @@
         <item>What a lovely experience, isn\'t it?</item>
         <item>nice</item>
         <item>ツ</item>
-        <item>#StayDerped \m/</item>
-        <item>DerpFest FTW \m/</item>
+        <item>#LosExt FTW \m/</item>
+        <item>LosExt FTW \m/</item>
         <item>What\'s on your mind?</item>
         <item>Got an issue? Don\'t forget a logcat</item>
-        <item>Get Derped</item>
-        <item>#StayDerped</item>
+        <item>Get faster</item>
+        <item>#LosExt FTW</item>
         <item>Charlie Watts is dead and you are alive</item>
         <item>rm -rf \/</item>
     </string-array>

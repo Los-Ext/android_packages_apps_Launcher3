@@ -58,16 +58,6 @@
             android:persistent="true"
             launcher:iconSpaceReserved="false" />
 
-        <ListPreference
-            android:key="pref_swipe_down_side"
-            android:title="@string/pref_swipe_down_side_title"
-            android:summary="@string/pref_swipe_down_side_summary"
-            android:entries="@array/pref_swipe_down_side_names"
-            android:entryValues="@array/pref_swipe_down_side_values"
-            android:defaultValue="0"
-            android:persistent="true"
-            launcher:iconSpaceReserved="false" />
-
     </PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

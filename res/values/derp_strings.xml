@@ -146,14 +146,6 @@
     <string name="pref_haptics_on_swipe_down_gestures_title">Haptics on swipe down gestures</string>
     <string name="pref_haptics_on_swipe_down_gestures_summary">Whether to perform haptics when doing any swipe down gesture or not</string>
 
-    <!-- Swipe down side control -->
-    <string name="pref_swipe_down_side_title">Swipe down side</string>
-    <string name="pref_swipe_down_side_summary">Choose which side(s) of the screen respond to swipe down gestures</string>
-    <string name="pref_swipe_down_side_both">Both sides</string>
-    <string name="pref_swipe_down_side_left">Left side only</string>
-    <string name="pref_swipe_down_side_right">Right side only</string>
-    <string name="pref_swipe_down_side_disabled">Disabled</string>
-
     <!-- Recents icons -->
     <string name="recents_chips_title">Use compact action design</string>
     <string name="recents_chips_summary">May be required for large numbers of actions to display</string>

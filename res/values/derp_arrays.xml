@@ -29,19 +29,4 @@
         <item>@string/pref_homescreen_gestures_qs_panel</item>
         <item>@string/pref_homescreen_gestures_powermenu</item>
     </string-array>
-
-    <!-- Swipe down side control -->
-    <string-array translatable="false" name="pref_swipe_down_side_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="pref_swipe_down_side_names">
-        <item>@string/pref_swipe_down_side_both</item>
-        <item>@string/pref_swipe_down_side_left</item>
-        <item>@string/pref_swipe_down_side_right</item>
-        <item>@string/pref_swipe_down_side_disabled</item>
-    </string-array>
 </resources>

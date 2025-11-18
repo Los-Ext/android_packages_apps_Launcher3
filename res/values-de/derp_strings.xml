@@ -193,7 +193,6 @@
     <string name="pref_homescreen_gestures_notifications">Benachrichtigungen</string>
     <string name="pref_homescreen_gestures_qs_panel">Schnelleinstellungen</string>
     <string name="pref_homescreen_gestures_powermenu">Ein-/Aus-Menü</string>
-    <string name="pref_homescreen_gestures_clear_all_apps">Alle Apps schließen</string>
 
     <!-- Shake Clear Recents -->
     <string name="recents_shake_clear_all_title">Telefon schütteln zum Schließen aller Apps</string>

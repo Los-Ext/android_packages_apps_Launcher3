@@ -74,7 +74,6 @@ public class SettingsGestures extends CollapsingToolbarBaseActivity
     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
     public static final String KEY_HOMESCREEN_DT_GESTURES = "pref_homescreen_dt_gestures";
     public static final String KEY_HOMESCREEN_SWIPE_DOWN_GESTURES = "pref_homescreen_swipe_down_gestures";
-    public static final String KEY_SWIPE_DOWN_SIDE = "pref_swipe_down_side";
 
     @VisibleForTesting
     static final String EXTRA_FRAGMENT = ":settings:fragment";
@@ -234,21 +233,6 @@ public class SettingsGestures extends CollapsingToolbarBaseActivity
                             getDevicePrefs(getActivity()).edit().putString(KEY_HOMESCREEN_SWIPE_DOWN_GESTURES, swipeDownGestureValue).commit();
                             swipeDownAction.setValue(swipeDownGestureValue);
                             swipeDownAction.setSummary(swipeDownAction.getEntry());
-                            Toast.makeText(getActivity(), R.string.restarting_launcher_changes, Toast.LENGTH_SHORT).show();
-                            Utilities.restartLauncher(getActivity());
-                            return true;
-                        }
-                    });
-
-                    final ListPreference swipeDownSide = (ListPreference) findPreference(KEY_SWIPE_DOWN_SIDE);
-                    swipeDownSide.setValue(getDevicePrefs(getActivity()).getString(KEY_SWIPE_DOWN_SIDE, "0"));
-                    swipeDownSide.setSummary(swipeDownSide.getEntry());
-                    swipeDownSide.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-                        public boolean onPreferenceChange(Preference preference, Object newValue) {
-                            String swipeDownSideValue = (String) newValue;
-                            getDevicePrefs(getActivity()).edit().putString(KEY_SWIPE_DOWN_SIDE, swipeDownSideValue).commit();
-                            swipeDownSide.setValue(swipeDownSideValue);
-                            swipeDownSide.setSummary(swipeDownSide.getEntry());
                             Toast.makeText(getActivity(), R.string.restarting_launcher_changes, Toast.LENGTH_SHORT).show();
                             Utilities.restartLauncher(getActivity());
                             return true;

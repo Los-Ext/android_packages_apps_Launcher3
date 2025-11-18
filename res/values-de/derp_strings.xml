@@ -124,14 +124,6 @@
     <string name="pref_haptics_on_swipe_down_gestures_title">Haptik bei Wisch-nach-unten-Gesten</string>
     <string name="pref_haptics_on_swipe_down_gestures_summary">Haptischer Effekt bei allen Wisch-nach-unten-Gesten</string>
 
-    <!-- Swipe down side control -->
-    <string name="pref_swipe_down_side_title">Wisch-nach-unten-Seite</string>
-    <string name="pref_swipe_down_side_summary">Wähle aus, welche Seite(n) des Bildschirms auf Wisch-nach-unten-Gesten reagieren</string>
-    <string name="pref_swipe_down_side_both">Beide Seiten</string>
-    <string name="pref_swipe_down_side_left">Nur linke Seite</string>
-    <string name="pref_swipe_down_side_right">Nur rechte Seite</string>
-    <string name="pref_swipe_down_side_disabled">Deaktiviert</string>
-
     <!-- Recents icons -->
     <string name="recents_screenshot_title">Screenshot</string>
     <string name="recents_clear_all_title">Alle Apps schließen</string>

@@ -1055,20 +1055,6 @@ public final class Utilities {
         }, WAIT_BEFORE_RESTART);
     }
 
-    /**
-     * Restarts the launcher activity properly using an Intent instead of System.exit(0).
-     * This method should be used when you want to restart the launcher without killing the entire process.
-     */
-    public static void restartLauncher(Context context) {
-        MAIN_EXECUTOR.getHandler().postDelayed(() -> {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setPackage(context.getPackageName());
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivity(intent);
-        }, WAIT_BEFORE_RESTART);
-    }
-
     public static boolean isWorkspaceEditAllowed(Context context) {
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return !prefs.getBoolean(InvariantDeviceProfile.KEY_WORKSPACE_LOCK, false);

@@ -29,7 +29,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
@@ -217,8 +216,7 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
                             getDevicePrefs(getActivity()).edit().putString(KEY_HOMESCREEN_DT_GESTURES, dtGestureValue).commit();
                             doubletabAction.setValue(dtGestureValue);
                             doubletabAction.setSummary(doubletabAction.getEntry());
-                            Toast.makeText(getActivity(), R.string.restarting_launcher_changes, Toast.LENGTH_SHORT).show();
-                            Utilities.restartLauncher(getActivity());
+                            Utilities.restart();
                             return true;
                         }
                     });

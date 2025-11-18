@@ -199,7 +199,7 @@
     <string name="pref_scroll_vibration_summary">Haptic feedback while scrolling through recent apps, if supported</string>
 
     <!-- LMOFreeform -->
-    <string name="floating_window">Floating window</string>
+    <string name="floating_window">Floating</string>
 
     <!-- Lock -->
     <string name="action_lock">Lock/Unlock app</string>

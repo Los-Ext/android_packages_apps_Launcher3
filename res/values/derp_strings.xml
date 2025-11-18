@@ -409,7 +409,6 @@
     </string-array>
 
     <!-- Gestures -->
-    <string name="gestures_category_title">Gestures</string>
     <string name="pref_homescreen_dt_gestures_title">Double tap</string>
     <string name="pref_homescreen_dt_gestures_summary">Select the action of the double tap gesture on the home screen</string>
 

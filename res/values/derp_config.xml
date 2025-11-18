@@ -24,9 +24,6 @@
     <!-- String representing the fragment class for recents view settings activity.-->
     <string name="recents_settings_fragment_name" translatable="false">com.android.launcher3.settings.SettingsRecents$RecentsSettingsFragment</string>
 
-    <!-- String representing the fragment class for gesture settings activity.-->
-    <string name="gesture_settings_fragment_name" translatable="false">com.android.launcher3.settings.SettingsGestures$GestureSettingsFragment</string>
-
     <!-- String representing the fragment class for about activity.-->
     <string name="about_fragment_name" translatable="false">com.android.launcher3.settings.SettingsAbout$AboutFragment</string>
 

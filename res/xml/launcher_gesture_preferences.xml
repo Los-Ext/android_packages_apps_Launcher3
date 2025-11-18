@@ -70,16 +70,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/recents_category_title">
-
-        <SwitchPreferenceCompat
-            android:key="pref_recents_shake_clear_all"
-            android:title="@string/recents_shake_clear_all_title"
-            android:defaultValue="false"
-            android:persistent="true"
-            launcher:iconSpaceReserved="false" />
-
-    </PreferenceCategory>
-
 </androidx.preference.PreferenceScreen>

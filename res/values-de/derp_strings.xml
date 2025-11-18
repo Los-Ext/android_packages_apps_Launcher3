@@ -167,7 +167,6 @@
     <string name="icon_pack_no_market">Es ist kein App-Store verfügbar</string>
 
     <!-- Gestures -->
-    <string name="gestures_category_title">Gesten</string>
     <string name="pref_homescreen_dt_gestures_title">Doppeltes Tippen</string>
     <string name="pref_homescreen_dt_gestures_summary">Wähle die Aktion der Doppeltipp-Geste auf dem Startbildschirm aus</string>
 

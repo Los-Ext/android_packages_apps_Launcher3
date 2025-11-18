@@ -51,14 +51,6 @@
             launcher:iconSpaceReserved="false" />
 
         <SwitchPreferenceCompat
-            android:key="pref_haptics_on_swipe_down_gestures"
-            android:title="@string/pref_haptics_on_swipe_down_gestures_title"
-            android:summary="@string/pref_haptics_on_swipe_down_gestures_summary"
-            android:defaultValue="true"
-            android:persistent="true"
-            launcher:iconSpaceReserved="false" />
-
-        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="pref_workspace_lock"
             android:persistent="true"

@@ -364,7 +364,7 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
             @Override
             public boolean onDoubleTap(MotionEvent event) {
                 // Double tap gestures
-                Gestures(event, mDoubleGestureMode, false);
+                Gestures(event, mDoubleGestureMode);
                 return true;
             }
 
@@ -379,7 +379,7 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
                             && Math.abs(velocityY) > 250/*min speed*/) {
                         // Swipe down gestures
                         if (mSwipeDownGestureMode != 0) {
-                            Gestures(e1, mSwipeDownGestureMode, true);
+                            Gestures(e1, mSwipeDownGestureMode);
                         }
                     }
                 } catch (Exception e) {
@@ -395,13 +395,10 @@ public class Workspace<T extends View & PageIndicator> extends PagedView<T>
     }
 
     // Gestures
-    private void Gestures(MotionEvent event, int gestureType, boolean isSwipeDown) {
+    private void Gestures(MotionEvent event, int gestureType) {
         // Check if haptic feedback is enabled for the appropriate gesture type
-        if (gestureType != 0) {
-            String prefKey = isSwipeDown ? "pref_haptics_on_swipe_down_gestures" : "pref_haptics_on_dt_gestures";
-            if (getDevicePrefs(getContext()).getBoolean(prefKey, true)) {
-                VibratorWrapper.INSTANCE.get(getContext()).vibrate(VibratorWrapper.EFFECT_CLICK);
-            }
+        if (gestureType != 0 && getDevicePrefs(getContext()).getBoolean("pref_haptics_on_dt_gestures", true)) {
+            VibratorWrapper.INSTANCE.get(getContext()).vibrate(VibratorWrapper.EFFECT_CLICK);
         }
         
         switch(gestureType) {

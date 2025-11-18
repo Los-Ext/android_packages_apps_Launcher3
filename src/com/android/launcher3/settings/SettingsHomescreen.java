@@ -73,7 +73,6 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
     public static final String KEY_HOMESCREEN_DT_GESTURES = "pref_homescreen_dt_gestures";
-    public static final String KEY_HOMESCREEN_SWIPE_DOWN_GESTURES = "pref_homescreen_swipe_down_gestures";
 
     @VisibleForTesting
     static final String EXTRA_FRAGMENT = ":settings:fragment";
@@ -218,21 +217,6 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
                             getDevicePrefs(getActivity()).edit().putString(KEY_HOMESCREEN_DT_GESTURES, dtGestureValue).commit();
                             doubletabAction.setValue(dtGestureValue);
                             doubletabAction.setSummary(doubletabAction.getEntry());
-                            Toast.makeText(getActivity(), R.string.restarting_launcher_changes, Toast.LENGTH_SHORT).show();
-                            Utilities.restartLauncher(getActivity());
-                            return true;
-                        }
-                    });
-
-                    final ListPreference swipeDownAction = (ListPreference) findPreference(KEY_HOMESCREEN_SWIPE_DOWN_GESTURES);
-                    swipeDownAction.setValue(getDevicePrefs(getActivity()).getString(KEY_HOMESCREEN_SWIPE_DOWN_GESTURES, "0"));
-                    swipeDownAction.setSummary(swipeDownAction.getEntry());
-                    swipeDownAction.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-                        public boolean onPreferenceChange(Preference preference, Object newValue) {
-                            String swipeDownGestureValue = (String) newValue;
-                            getDevicePrefs(getActivity()).edit().putString(KEY_HOMESCREEN_SWIPE_DOWN_GESTURES, swipeDownGestureValue).commit();
-                            swipeDownAction.setValue(swipeDownGestureValue);
-                            swipeDownAction.setSummary(swipeDownAction.getEntry());
                             Toast.makeText(getActivity(), R.string.restarting_launcher_changes, Toast.LENGTH_SHORT).show();
                             Utilities.restartLauncher(getActivity());
                             return true;

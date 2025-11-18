@@ -404,12 +404,6 @@
     <!-- Gestures -->
     <string name="pref_homescreen_dt_gestures_title">Double tap</string>
     <string name="pref_homescreen_dt_gestures_summary">Select the action of the double tap gesture on the home screen</string>
-
-    <!-- Swipe down gestures -->
-    <string name="pref_homescreen_swipe_down_gestures_title">Swipe down</string>
-    <string name="pref_homescreen_swipe_down_gestures_summary">Configure swipe down gesture on home screen</string>
-
-    <!-- Gesture actions -->
     <string name="pref_homescreen_gestures_none">None</string>
     <string name="pref_homescreen_gestures_sleep">Screen off</string>
     <string name="pref_homescreen_gestures_torch">Flashlight</string>

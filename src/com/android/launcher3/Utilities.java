@@ -33,7 +33,6 @@ import android.app.KeyguardManager;
 import android.app.Person;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
@@ -1046,20 +1045,6 @@ public final class Utilities {
     public static void restart() {
         MAIN_EXECUTOR.getHandler().postDelayed(() -> {
             System.exit(0);
-        }, WAIT_BEFORE_RESTART);
-    }
-
-    /**
-     * Restarts the launcher activity properly using an Intent instead of System.exit(0).
-     * This method should be used when you want to restart the launcher without killing the entire process.
-     */
-    public static void restartLauncher(Context context) {
-        MAIN_EXECUTOR.getHandler().postDelayed(() -> {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setPackage(context.getPackageName());
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivity(intent);
         }, WAIT_BEFORE_RESTART);
     }
 

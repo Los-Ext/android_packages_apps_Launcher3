@@ -18,11 +18,6 @@ package com.android.launcher3.settings;
 
 import static androidx.core.view.accessibility.AccessibilityNodeInfoCompat.ACTION_ACCESSIBILITY_FOCUS;
 
-import static com.android.launcher3.LauncherPrefs.getDevicePrefs;
-
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,8 +28,16 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.view.WindowCompat;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference.OnPreferenceChangeListener;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
+import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartScreenCallback;
+import androidx.preference.PreferenceGroup.PreferencePositionCallback;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.launcher3.DeviceProfile;
 import com.android.launcher3.InvariantDeviceProfile;
@@ -47,31 +50,16 @@ import com.android.launcher3.model.WidgetsModel;
 
 import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 
-import java.util.Collections;
-import java.util.List;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragment;
-import androidx.preference.PreferenceFragment.OnPreferenceStartFragmentCallback;
-import androidx.preference.PreferenceFragment.OnPreferenceStartScreenCallback;
-import androidx.preference.PreferenceGroup.PreferencePositionCallback;
-import androidx.preference.PreferenceScreen;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * Settings activity for Launcher.
  */
 public class SettingsHomescreen extends CollapsingToolbarBaseActivity
         implements OnPreferenceStartFragmentCallback, OnPreferenceStartScreenCallback {
 
-    /** List of fragments that can be hosted by this activity. */
-    private static final List<String> VALID_PREFERENCE_FRAGMENTS = Collections.emptyList();
-
     public static final String EXTRA_FRAGMENT_ARG_KEY = ":settings:fragment_args_key";
     public static final String EXTRA_SHOW_FRAGMENT_ARGS = ":settings:show_fragment_args";
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     public static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
-    public static final String KEY_HOMESCREEN_DT_GESTURES = "pref_homescreen_dt_gestures";
 
     @VisibleForTesting
     static final String EXTRA_FRAGMENT = ":settings:fragment";
@@ -97,45 +85,28 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
                 args.putString(EXTRA_FRAGMENT_ARG_KEY, prefKey);
             }
 
-            Fragment f = Fragment.instantiate(
-                    this, getPreferenceFragment(), args);
-
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, f)
+            final FragmentManager fm = getSupportFragmentManager();
+            final Fragment f = fm.getFragmentFactory().instantiate(getClassLoader(),
+                    getString(R.string.home_screen_settings_fragment_name));
+            f.setArguments(args);
+            // Display the fragment as the main content.
+            fm.beginTransaction()
+                    .replace(com.android.settingslib.collapsingtoolbar.R.id.content_frame, f)
                     .commit();
         }
     }
 
-    /**
-     * Obtains the preference fragment to instantiate in this activity.
-     *
-     * @return the preference fragment class
-     * @throws IllegalArgumentException if the fragment is unknown to this activity
-     */
-    private String getPreferenceFragment() {
-        String preferenceFragment = getIntent().getStringExtra(EXTRA_FRAGMENT_ARGS);
-        String defaultFragment = getString(R.string.home_screen_settings_fragment_name);
-
-        if (TextUtils.isEmpty(preferenceFragment)) {
-            return defaultFragment;
-        } else if (!preferenceFragment.equals(defaultFragment)
-                && !VALID_PREFERENCE_FRAGMENTS.contains(preferenceFragment)) {
-            throw new IllegalArgumentException(
-                    "Invalid fragment for this activity: " + preferenceFragment);
-        } else {
-            return preferenceFragment;
-        }
-    }
-
     private boolean startPreference(String fragment, Bundle args, String key) {
-        if (Utilities.ATLEAST_T && getFragmentManager().isStateSaved()) {
+        if (Utilities.ATLEAST_T && getSupportFragmentManager().isStateSaved()) {
             // Sometimes onClick can come after onPause because of being posted on the handler.
             // Skip starting new preferences in that case.
             return false;
         }
-        Fragment f = Fragment.instantiate(this, fragment, args);
+        final FragmentManager fm = getSupportFragmentManager();
+        final Fragment f = fm.getFragmentFactory().instantiate(getClassLoader(), fragment);
         if (f instanceof DialogFragment) {
-            ((DialogFragment) f).show(getFragmentManager(), key);
+            f.setArguments(args);
+            ((DialogFragment) f).show(fm, key);
         } else {
             startActivity(new Intent(this, SettingsHomescreen.class)
                     .putExtra(EXTRA_FRAGMENT, fragment)
@@ -146,14 +117,14 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
 
     @Override
     public boolean onPreferenceStartFragment(
-            PreferenceFragment preferenceFragment, Preference pref) {
+            PreferenceFragmentCompat preferenceFragment, Preference pref) {
         return startPreference(pref.getFragment(), pref.getExtras(), pref.getKey());
     }
 
     @Override
-    public boolean onPreferenceStartScreen(PreferenceFragment caller, PreferenceScreen pref) {
+    public boolean onPreferenceStartScreen(PreferenceFragmentCompat caller, PreferenceScreen pref) {
         Bundle args = new Bundle();
-        args.putString(PreferenceFragment.ARG_PREFERENCE_ROOT, pref.getKey());
+        args.putString(PreferenceFragmentCompat.ARG_PREFERENCE_ROOT, pref.getKey());
         return startPreference(getString(R.string.home_category_title), args, pref.getKey());
     }
 
@@ -169,7 +140,7 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
     /**
      * This fragment shows the launcher preferences.
      */
-    public static class HomescreenSettingsFragment extends PreferenceFragment
+    public static class HomescreenSettingsFragment extends PreferenceFragmentCompat
             implements SharedPreferences.OnSharedPreferenceChangeListener {
 
         private String mHighLightKey;
@@ -207,19 +178,6 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
             mShowGoogleBarPref = screen.findPreference(Utilities.KEY_DOCK_SEARCH);
             updateIsGoogleAppEnabled();
 
-                    final ListPreference doubletabAction = (ListPreference) findPreference(KEY_HOMESCREEN_DT_GESTURES);
-                    doubletabAction.setValue(getDevicePrefs(getActivity()).getString(KEY_HOMESCREEN_DT_GESTURES, "1"));
-                    doubletabAction.setSummary(doubletabAction.getEntry());
-                    doubletabAction.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-                        public boolean onPreferenceChange(Preference preference, Object newValue) {
-                            String dtGestureValue = (String) newValue;
-                            getDevicePrefs(getActivity()).edit().putString(KEY_HOMESCREEN_DT_GESTURES, dtGestureValue).commit();
-                            doubletabAction.setValue(dtGestureValue);
-                            doubletabAction.setSummary(doubletabAction.getEntry());
-                            Utilities.restart();
-                            return true;
-                        }
-                    });
             if (getActivity() != null && !TextUtils.isEmpty(getPreferenceScreen().getTitle())) {
                 getActivity().setTitle(getPreferenceScreen().getTitle());
             }

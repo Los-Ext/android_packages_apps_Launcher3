@@ -116,9 +116,13 @@
     <string name="about">Über</string>
     <string name="about_summary">Info über den Launcher3Ext</string>
 
+    <!-- DT2S -->
+    <string name="pref_sleep_gesture_title">Doppeltippen zum Sperren</string>
+    <string name="pref_sleep_gesture_summary">Zum Sperren auf einen leeren Bereich doppeltippen</string>
+
     <!-- Haptics on DT2S -->
-    <string name="pref_haptics_on_dt_gestures_title">Haptik bei Doppeltipp-Gesten</string>
-    <string name="pref_haptics_on_dt_gestures_summary">Haptischer Effekt bei allen Doppeltipp-Gesten</string>
+    <string name="pref_haptics_on_dt2s_title">Haptik beim Doppeltippen zum Sperren</string>
+    <string name="pref_haptics_on_dt2s_summary">Haptischer Effekt bei der Geste Doppeltippen zum Sperren</string>
 
     <!-- Recents icons -->
     <string name="recents_screenshot_title">Screenshot</string>
@@ -161,19 +165,6 @@
     <string name="icon_pack_default_label">Standard</string>
     <string name="icon_pack_add">Weitere installieren</string>
     <string name="icon_pack_no_market">Es ist kein App-Store verfügbar</string>
-
-    <!-- Gestures -->
-    <string name="pref_homescreen_dt_gestures_title">Doppeltes Tippen</string>
-    <string name="pref_homescreen_dt_gestures_summary">Wähle die Aktion der Doppeltipp-Geste auf dem Startbildschirm aus</string>
-    <string name="pref_homescreen_gestures_none">Keine</string>
-    <string name="pref_homescreen_gestures_sleep">Bildschirm ausschalten</string>
-    <string name="pref_homescreen_gestures_torch">Taschenlampe</string>
-    <string name="pref_homescreen_gestures_volume_panel">Lautstärkeregler</string>
-    <string name="pref_homescreen_gestures_clear_notifications">Benachrichtigungen löschen</string>
-    <string name="pref_homescreen_gestures_screenshot">Screenshot</string>
-    <string name="pref_homescreen_gestures_notifications">Benachrichtigungen</string>
-    <string name="pref_homescreen_gestures_qs_panel">Schnelleinstellungen</string>
-    <string name="pref_homescreen_gestures_powermenu">Ein-/Aus-Menü</string>
 
     <!-- Shake Clear Recents -->
     <string name="recents_shake_clear_all_title">Telefon schütteln zum Schließen aller Apps</string>

@@ -138,9 +138,13 @@
     <string name="about">About</string>
     <string name="about_summary">Info about the Launcher3Ext</string>
 
+    <!-- DT2S -->
+    <string name="pref_sleep_gesture_title">Double tap to sleep</string>
+    <string name="pref_sleep_gesture_summary">Double tap on empty space for screen off</string>
+
     <!-- Haptics on DT2S -->
-    <string name="pref_haptics_on_dt_gestures_title">Haptics on double tap gestures</string>
-    <string name="pref_haptics_on_dt_gestures_summary">Whether to perform haptics when doing any double tap gesture or not</string>
+    <string name="pref_haptics_on_dt2s_title">Haptics on double tap to sleep</string>
+    <string name="pref_haptics_on_dt2s_summary">Whether to perform haptics when doing double tap to sleep gesture or not</string>
 
     <!-- Recents icons -->
     <string name="recents_chips_title">Use compact action design</string>
@@ -400,19 +404,6 @@
         <item>pinterest</item>
     -->
     </string-array>
-
-    <!-- Gestures -->
-    <string name="pref_homescreen_dt_gestures_title">Double tap</string>
-    <string name="pref_homescreen_dt_gestures_summary">Select the action of the double tap gesture on the home screen</string>
-    <string name="pref_homescreen_gestures_none">None</string>
-    <string name="pref_homescreen_gestures_sleep">Screen off</string>
-    <string name="pref_homescreen_gestures_torch">Flashlight</string>
-    <string name="pref_homescreen_gestures_volume_panel">Volume panel</string>
-    <string name="pref_homescreen_gestures_clear_notifications">Clear notifications</string>
-    <string name="pref_homescreen_gestures_screenshot">Screenshot</string>
-    <string name="pref_homescreen_gestures_notifications">Notifications</string>
-    <string name="pref_homescreen_gestures_qs_panel">QS panel</string>
-    <string name="pref_homescreen_gestures_powermenu">Power menu</string>
 
     <!-- Shake Clear Recents -->
     <string name="recents_shake_clear_all_title">Shake phone to clear all tasks</string>

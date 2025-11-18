@@ -57,9 +57,9 @@
     <!-- Restart launcher -->
     <string name="pref_restart_title">Neu starten</string>
     <string name="pref_restart_summary">Startet den Startbildschirm neu, um ausstehende Änderungen an den Einstellungen anzuwenden</string>
-    <string name="restarting_launcher">DerpLauncher wird neu gestartet …</string>
-    <string name="restarting_launcher_changes">DerpLauncher wird neu gestartet, um Änderungen anzuwenden …</string>
-    <string name="updating_launcher_components">DerpLauncher wird neu gestartet, um Elemente zu aktualisieren …</string>
+    <string name="restarting_launcher">Launcher3Ext wird neu gestartet …</string>
+    <string name="restarting_launcher_changes">Launcher3Ext wird neu gestartet, um Änderungen anzuwenden …</string>
+    <string name="updating_launcher_components">Launcher3Ext wird neu gestartet, um Elemente zu aktualisieren …</string>
 
     <!-- Proper seekbar -->
     <string name="proper_seekbar_value">Wert: <xliff:g id="v">%s</xliff:g></string>
@@ -114,7 +114,7 @@
     <string name="about_app_subtitle">Basierend auf AOSP Launcher3</string>
     <string name="about_thanks_cat">Besonderen Dank an</string>
     <string name="about">Über</string>
-    <string name="about_summary">Info über den DerpLauncher</string>
+    <string name="about_summary">Info über den Launcher3Ext</string>
 
     <!-- Haptics on DT2S -->
     <string name="pref_haptics_on_dt_gestures_title">Haptik bei Doppeltipp-Gesten</string>

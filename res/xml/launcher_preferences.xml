@@ -22,9 +22,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:aapt="http://schemas.android.com/aapt">
 
+<!--
     <androidx.preference.ListPreference
         settings:layout="@layout/derp_settings_header"
         android:selectable="false"/>
+-->
 
     <Preference
         android:key="icons"

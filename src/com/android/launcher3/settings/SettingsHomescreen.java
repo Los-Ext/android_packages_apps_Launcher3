@@ -10,6 +10,7 @@ import static com.android.launcher3.InvariantDeviceProfile.TYPE_TABLET;
 import static com.android.launcher3.util.Executors.MAIN_EXECUTOR;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.SharedPreferences;
@@ -167,6 +168,8 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
 
         private boolean mPreferenceHighlighted = false;
 
+        private static final String KEY_CLEAR_HOME_SCREEN = "pref_clear_home_screen";
+
         private static final String KEY_MINUS_ONE = "pref_enable_minus_one";
 
         private Preference mShowGoogleAppPref;
@@ -204,6 +207,22 @@ public class SettingsHomescreen extends CollapsingToolbarBaseActivity
             initPreferences(screen);
 
             mShowGoogleAppPref = screen.findPreference(KEY_MINUS_ONE);
+
+            Preference clearHomeScreenPref = screen.findPreference(KEY_CLEAR_HOME_SCREEN);
+            if (clearHomeScreenPref != null) {
+                clearHomeScreenPref.setOnPreferenceClickListener(pref -> {
+                    new AlertDialog.Builder(getContext())
+                            .setMessage(R.string.remove_all_views_from_home_screen_desc)
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                LauncherAppState.getInstance(getContext())
+                                        .clearAllViewsFromHomeScreen();
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
+                    return true;
+                });
+            }
+
             updateIsGoogleAppEnabled();
 
             if (mHighLightKey != null

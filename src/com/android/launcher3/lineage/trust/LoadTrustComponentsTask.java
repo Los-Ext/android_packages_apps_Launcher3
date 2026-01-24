@@ -73,10 +73,8 @@ public class LoadTrustComponentsTask extends AsyncTask<Void, Integer, List<Trust
             PackageInfo app = apps.get(i);
             try {
                 String pkgName = app.packageName;
-                if ((!app.applicationInfo.isSystemApp() || launchablePackages.contains(pkgName) ||
-                        whiteListedPackages.contains(pkgName)) &&
-                        mPackageManager.getLaunchIntentForPackage(pkgName) != null) {
-
+                if (!app.applicationInfo.isSystemApp() || launchablePackages.contains(pkgName) ||
+                        whiteListedPackages.contains(pkgName)) {
                     String label = mPackageManager.getApplicationLabel(
                             mPackageManager.getApplicationInfo(pkgName,
                                     PackageManager.GET_META_DATA)).toString();

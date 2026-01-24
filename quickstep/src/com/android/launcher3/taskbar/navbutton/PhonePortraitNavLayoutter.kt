@@ -50,9 +50,7 @@ class PhonePortraitNavLayoutter(
     ) {
 
     override fun layoutButtons(context: TaskbarActivityContext, isA11yButtonPersistent: Boolean) {
-        val layoutMode = homeButton?.context?.let {
-            SettingsCache.INSTANCE.get(it).getIntValue(NAV_BAR_LAYOUT, 0)
-        } ?: 0
+        val layoutMode = SettingsCache.INSTANCE.get(homeButton!!.context).getIntValue(NAV_BAR_LAYOUT, 0)
         val totalWidth = context.deviceProfile.deviceProperties.widthPx
         val homeButtonWidth =
             resources.getDimensionPixelSize(R.dimen.taskbar_phone_home_button_size)
@@ -88,16 +86,14 @@ class PhonePortraitNavLayoutter(
         navButtonContainer.removeAllViews()
         navButtonContainer.orientation = LinearLayout.HORIZONTAL
 
-        if (backButton != null && homeButton != null && recentsButton != null) {
-            if (SettingsCache.INSTANCE.get(context).getValue(NAV_BAR_INVERSE, 0)) {
-                navButtonContainer.addView(recentsButton)
-                navButtonContainer.addView(homeButton)
-                navButtonContainer.addView(backButton)
-            } else {
-                navButtonContainer.addView(backButton)
-                navButtonContainer.addView(homeButton)
-                navButtonContainer.addView(recentsButton)
-            }
+        if (SettingsCache.INSTANCE.get(context).getValue(NAV_BAR_INVERSE, 0)) {
+            navButtonContainer.addView(recentsButton)
+            navButtonContainer.addView(homeButton)
+            navButtonContainer.addView(backButton)
+        } else {
+            navButtonContainer.addView(backButton)
+            navButtonContainer.addView(homeButton)
+            navButtonContainer.addView(recentsButton)
         }
 
         navButtonContainer.layoutParams = navContainerParams

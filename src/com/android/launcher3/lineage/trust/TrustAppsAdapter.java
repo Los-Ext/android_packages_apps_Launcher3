@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2019 The LineageOS Project
- * Copyright (C) 2023 AlphaDroid
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +15,6 @@
  */
 package com.android.launcher3.lineage.trust;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
@@ -33,7 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.internal.util.crdroid.Utils;
 import com.android.launcher3.R;
 import com.android.launcher3.lineage.trust.db.TrustComponent;
 
@@ -44,10 +39,8 @@ class TrustAppsAdapter extends RecyclerView.Adapter<TrustAppsAdapter.ViewHolder>
     private List<TrustComponent> mList = new ArrayList<>();
     private Listener mListener;
     private boolean mHasSecureKeyguard;
-    private Context mContext;
 
-    TrustAppsAdapter(Context context, Listener listener, boolean hasSecureKeyguard) {
-        mContext = context;
+    TrustAppsAdapter(Listener listener, boolean hasSecureKeyguard) {
         mListener = listener;
         mHasSecureKeyguard = hasSecureKeyguard;
     }
@@ -102,14 +95,10 @@ class TrustAppsAdapter extends RecyclerView.Adapter<TrustAppsAdapter.ViewHolder>
 
             mHiddenView.setImageResource(component.isHidden() ?
                     R.drawable.ic_hidden_locked : R.drawable.ic_hidden_unlocked);
-
             mProtectedView.setImageResource(component.isProtected() ?
                     R.drawable.ic_protected_locked : R.drawable.ic_protected_unlocked);
 
             mProtectedView.setVisibility(hasSecureKeyguard ? View.VISIBLE : View.GONE);
-
-            mHiddenView.setVisibility(Utils.launchablePackages(mContext).contains(component.getPackageName()) ?
-                    View.VISIBLE : View.GONE);
 
             mHiddenView.setOnClickListener(v -> {
                 component.invertVisibility();

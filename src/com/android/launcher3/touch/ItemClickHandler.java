@@ -54,6 +54,7 @@ import com.android.launcher3.R;
 import com.android.launcher3.apppairs.AppPairIcon;
 import com.android.launcher3.folder.Folder;
 import com.android.launcher3.folder.FolderIcon;
+import com.android.launcher3.lineage.trust.db.TrustDatabaseHelper;
 import com.android.launcher3.logging.InstanceId;
 import com.android.launcher3.logging.InstanceIdSequence;
 import com.android.launcher3.logging.StatsLogManager;
@@ -434,8 +435,15 @@ public class ItemClickHandler {
             FloatingIconView.fetchIcon(launcher, v, item, true /* isOpening */);
         }
 
-        // AppLock will handle authentication dialog
-        launcher.startActivitySafely(v, intent, item);
+        TrustDatabaseHelper db = TrustDatabaseHelper.getInstance(launcher);
+        ComponentName cn = item.getTargetComponent();
+        boolean isProtected = cn != null && db.isPackageProtected(cn.getPackageName());
+
+        if (isProtected) {
+            launcher.startActivitySafelyAuth(v, intent, item);
+        } else {
+            launcher.startActivitySafely(v, intent, item);
+        }
     }
 
     /**

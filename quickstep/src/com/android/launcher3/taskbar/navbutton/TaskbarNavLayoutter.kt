@@ -54,9 +54,6 @@ class TaskbarNavLayoutter(
         val layoutMode = homeButton?.context?.let {
             SettingsCache.INSTANCE.get(it).getIntValue(NAV_BAR_LAYOUT, 0)
         } ?: 0
-        val inverseMode = homeButton?.context?.let {
-            SettingsCache.INSTANCE.get(it).getIntValue(NAV_BAR_INVERSE, 0)
-        } ?: 0
 
         // Add spacing after the end of the last nav button
         var navMarginEnd =
@@ -93,16 +90,18 @@ class TaskbarNavLayoutter(
         navButtonContainer.orientation = LinearLayout.HORIZONTAL
         navButtonContainer.layoutParams = navButtonParams
 
-        navButtonContainer.removeAllViews()
+        if (backButton != null && homeButton != null && recentsButton != null) {
+            navButtonContainer.removeAllViews()
 
-        if (inverseMode == 1) {
-            navButtonContainer.addView(recentsButton)
-            navButtonContainer.addView(homeButton)
-            navButtonContainer.addView(backButton)
-        } else {
-            navButtonContainer.addView(backButton)
-            navButtonContainer.addView(homeButton)
-            navButtonContainer.addView(recentsButton)
+            if (SettingsCache.INSTANCE.get(context).getValue(NAV_BAR_INVERSE, 0)) {
+                navButtonContainer.addView(recentsButton)
+                navButtonContainer.addView(homeButton)
+                navButtonContainer.addView(backButton)
+            } else {
+                navButtonContainer.addView(backButton)
+                navButtonContainer.addView(homeButton)
+                navButtonContainer.addView(recentsButton)
+            }
         }
 
         // Add the spaces in between the nav buttons

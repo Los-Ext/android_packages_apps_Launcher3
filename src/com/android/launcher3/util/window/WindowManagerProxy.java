@@ -480,7 +480,7 @@ public class WindowManagerProxy {
                 DEFAULT_DISPLAY);
     }
 
-    public int getDisplayId(Context displayInfoContext) {
+    private int getDisplayId(Context displayInfoContext) {
         try {
             return displayInfoContext.getDisplay().getDisplayId();
         } catch (UnsupportedOperationException e) {

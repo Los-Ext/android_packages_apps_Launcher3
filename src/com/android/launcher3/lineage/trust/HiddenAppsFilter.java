@@ -18,13 +18,9 @@ package com.android.launcher3.lineage.trust;
 import android.content.ComponentName;
 import android.content.Context;
 
-import com.android.launcher3.dagger.ApplicationContext;
-
 import com.android.launcher3.AppFilter;
 
 import androidx.annotation.NonNull;
-
-import javax.inject.Inject;
 
 @SuppressWarnings("unused")
 public class HiddenAppsFilter extends AppFilter {
@@ -32,8 +28,7 @@ public class HiddenAppsFilter extends AppFilter {
     @NonNull
     private AppLockHelper mAppLockHelper;
 
-    @Inject
-    public HiddenAppsFilter(@ApplicationContext Context context) {
+    public HiddenAppsFilter(Context context) {
         super(context);
 
         mAppLockHelper = AppLockHelper.getInstance(context);

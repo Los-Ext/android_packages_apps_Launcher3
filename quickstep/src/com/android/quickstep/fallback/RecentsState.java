@@ -179,7 +179,7 @@ public class RecentsState implements BaseState<RecentsState> {
     public ScrimColors getScrimColor(Context context) {
         int scrimColor = ColorUtils.setAlphaComponent(
                 Themes.getAttrColor(context, R.attr.overviewScrimColor),
-                LauncherPrefs.RECENTS_OPACITY.get(context) * 255 / 100);
+                255);
         return new ScrimColors(
                 /* backgroundColor */ hasFlag(FLAG_SCRIM)
                 ? scrimColor

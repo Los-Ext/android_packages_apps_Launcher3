@@ -217,4 +217,10 @@
     <string name="remove_all_views_from_home_screen_desc">Home screen will be cleared. Do you want to continue?</string>
     <!-- Message shown when all home screen views are removed -->
     <string name="home_screen_all_views_removed_msg">Home screen cleared</string>
+
+    <!-- Third-party search widget -->
+    <string name="dock_search_widget_title">Search widget</string>
+    <string name="dock_search_widget_summary">Use a compatible third-party search widget in the dock</string>
+    <string name="dock_search_widget_picker_title">Select search widget</string>
+    <string name="dock_search_widget_default">Default search widget</string>
 </resources>
